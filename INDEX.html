@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>YOUSSEF IDIR</title>
+
+    <style>
+        /* RESET */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        /* BODY + BACKGROUND ANIMATION */
+        
+        body {
+            background: linear-gradient(135deg, #FFD700, #FFF176);
+            background-size: 400% 400%;
+            animation: bg 10s infinite alternate;
+            text-align: center;
+        }
+        
+        @keyframes bg {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* NAVBAR */
+        
+        nav {
+            background: #FFC107;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        nav .logo {
+            font-weight: bold;
+            font-size: 22px;
+            color: black;
+        }
+        
+        nav a {
+            text-decoration: none;
+            margin: 5px 15px;
+            font-weight: bold;
+            color: black;
+            transition: 0.3s;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        /* HERO SECTION */
+        
+        .hero {
+            margin-top: 50px;
+            animation: zoom 2s;
+            padding: 0 10px;
+        }
+        
+        @keyframes zoom {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .hero h1 {
+            font-size: 45px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin: 10px 0 20px 0;
+        }
+        /* BUTTON */
+        
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #FFD700;
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        
+        .button:hover {
+            transform: scale(1.1);
+            background: #FFEB3B;
+        }
+        /* HERO IMAGE */
+        
+        .hero-img {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px gray;
+            animation: float 3s infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        /* PROJECTS SECTION */
+        
+        .projects {
+            margin-top: 60px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .project {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px gray;
+            animation: pop 1.5s;
+        }
+        
+        @keyframes pop {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .project img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            margin-bottom: 10px;
+        }
+        
+        .project h3 {
+            margin-bottom: 10px;
+        }
+        
+        .project p {
+            font-size: 16px;
+            color: #555;
+        }
+        /* RESPONSIVE */
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 35px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">YOUSSEF IDIR</div>
+        <div>
+            <a href="index.html">HOME</a>
+            <a href="about.html">ABOUT</a>
+            <a href="contact.html">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <h1>WELCOME TO PORTFOLIO THE YOUSSEFN IDIR </h1>
+        <p>DISCOVER MY PROJECTS AND WORKS</p>
+        <img src="idir.jpeg" alt="LOGO" class="hero-img">
+        <br>
+        <a class="button" href="contact.html">CONTACT ME</a>
+    </div>
+
+    <!-- PROJECTS SECTION -->
+    <div class="projects">
+        <div class="project">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.CExX2umnV8PMmdPfzxwepwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Project 1">
+            <h3>YOUSSEF IDIR</h3>
+            <p>YOUSSEF IDIR IS THE BEST PLAYER IN PES FOR THE YEARS 2024/2025 </p>
+        </div>
+        <div class="project">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.CExX2umnV8PMmdPfzxwepwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="pr">
+            <h3>PROJECT 2</h3>
+            <p>Description of project 2</p>
+        </div>
+        <div class="project">
+            <img src="skoma.jpeg" alt="Project 3">
+            <h3>L9A7BA TA3T YOUSSEF IDIR</h3>
+            <p>LI MAKAY3RAFCH SKOMA SKOMA HOWA L9A7BA TA3T YOUSSEF F PES O DIMA HAZO </p>
+        </div>
+        <div class="project">
+            <img src="project4.jpg" alt="Project 4">
+            <h3>PROJECT 4</h3>
+            <p>Description of project 4</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

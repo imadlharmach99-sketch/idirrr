@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<HTML LANG="EN">
+
+<HEAD>
+    <META CHARSET="UTF-8">
+    <TITLE>CONTACT</TITLE>
+
+    <STYLE>
+        BODY {
+            FONT-FAMILY: ARIAL;
+            BACKGROUND: LINEAR-GRADIENT(135DEG, #FFD700, #FFF176);
+            DISPLAY: FLEX;
+            JUSTIFY-CONTENT: CENTER;
+            ALIGN-ITEMS: CENTER;
+            HEIGHT: 100VH;
+        }
+        
+        FORM {
+            BACKGROUND: WHITE;
+            PADDING: 30PX;
+            BORDER-RADIUS: 15PX;
+            BOX-SHADOW: 0 0 20PX GRAY;
+            ANIMATION: ZOOM 1.5S;
+        }
+        
+        @keyframes ZOOM {
+            FROM {
+                TRANSFORM: SCALE(0);
+            }
+            TO {
+                TRANSFORM: SCALE(1);
+            }
+        }
+        
+        INPUT,
+        TEXTAREA {
+            WIDTH: 100%;
+            PADDING: 10PX;
+            MARGIN: 10PX 0;
+            BORDER: 2PX SOLID #FFD700;
+            BORDER-RADIUS: 10PX;
+        }
+        
+        BUTTON {
+            PADDING: 10PX;
+            BORDER: NONE;
+            BORDER-RADIUS: 10PX;
+            CURSOR: POINTER;
+            MARGIN: 5PX;
+        }
+        
+        .SEND {
+            BACKGROUND: #FFD700;
+        }
+        
+        .RESET {
+            BACKGROUND: RED;
+            COLOR: WHITE;
+        }
+    </STYLE>
+
+</HEAD>
+
+<BODY>
+
+    <FORM>
+
+        <H2>CONTACT US</H2>
+
+        <INPUT TYPE="TEXT" PLACEHOLDER="YOUR NAME">
+
+        <INPUT TYPE="EMAIL" PLACEHOLDER="YOUR EMAIL">
+
+        <TEXTAREA PLACEHOLDER="YOUR MESSAGE"></TEXTAREA>
+
+        <BUTTON TYPE="SUBMIT" CLASS="SEND">ENVOYER</BUTTON>
+        <BUTTON TYPE="RESET" CLASS="RESET">EFFACER</BUTTON>
+
+    </FORM>
+
+</BODY>
+
+</HTML>
