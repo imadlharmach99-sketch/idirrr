@@ -1,234 +1,582 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8">
-    <title>YOUSSEF IDIR</title>
-
+    <title>youssef idir - Elite Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* RESET */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        /* BODY + BACKGROUND ANIMATION */
-        
         body {
-            background: linear-gradient(135deg, #FFD700, #FFF176);
-            background-size: 400% 400%;
-            animation: bg 10s infinite alternate;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            overflow-x: hidden;
+            background: #000;
+            color: #fff;
+        }
+        
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 50px auto;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+            border: 1px solid #222;
+        }
+        
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1,
+        h2 {
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
-        @keyframes bg {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-        /* NAVBAR */
-        
-        nav {
-            background: #FFC107;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+        h2 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 1.3em;
+            color: #eee;
         }
         
-        nav .logo {
-            font-weight: bold;
-            font-size: 22px;
-            color: black;
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            object-fit: cover;
         }
+        /* Player Attributes Grid */
         
-        nav a {
-            text-decoration: none;
-            margin: 5px 15px;
-            font-weight: bold;
-            color: black;
-            transition: 0.3s;
-        }
-        
-        nav a:hover {
-            color: white;
-        }
-        /* HERO SECTION */
-        
-        .hero {
-            margin-top: 50px;
-            animation: zoom 2s;
-            padding: 0 10px;
-        }
-        
-        @keyframes zoom {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-        
-        .hero h1 {
-            font-size: 45px;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            margin: 10px 0 20px 0;
-        }
-        /* BUTTON */
-        
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            background: #FFD700;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 10px;
-            transition: 0.3s;
-        }
-        
-        .button:hover {
-            transform: scale(1.1);
-            background: #FFEB3B;
-        }
-        /* HERO IMAGE */
-        
-        .hero-img {
-            width: 100%;
-            max-width: 300px;
-            margin-top: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px gray;
-            animation: float 3s infinite;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-        /* PROJECTS SECTION */
-        
-        .projects {
-            margin-top: 60px;
+        .skills-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+            justify-items: center;
+            margin-top: 25px;
+        }
+        
+        .skill-card {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .skill-card:hover {
+            transform: scale(1.1);
+            border-color: #fff;
+            background: #1a1a1a;
+        }
+        
+        .attr-icon {
+            width: 35px;
+            height: 35px;
+            margin-bottom: 8px;
+            filter: invert(1);
+        }
+        
+        .skill-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+        }
+        
+        .skill-name {
+            font-size: 11px;
+            color: #888;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        /* Experience Section */
+        
+        .experience {
+            display: flex;
+            align-items: center;
             gap: 20px;
-            padding: 0 20px;
-        }
-        
-        .project {
-            background: white;
+            background: #0f0f0f;
             padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px gray;
-            animation: pop 1.5s;
-        }
-        
-        @keyframes pop {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-        
-        .project img {
-            width: 100%;
+            margin-bottom: 15px;
             border-radius: 10px;
-            box-shadow: 0 0 10px gray;
-            margin-bottom: 10px;
+            border-left: 4px solid #fff;
         }
         
-        .project h3 {
-            margin-bottom: 10px;
+        .exp-logo {
+            width: 50px;
+            height: 50px;
+            filter: grayscale(1) invert(1);
         }
         
-        .project p {
-            font-size: 16px;
-            color: #555;
+        .exp-content h3 {
+            margin: 0;
+            font-size: 1.1em;
         }
-        /* RESPONSIVE */
+        
+        .exp-content p {
+            margin: 5px 0 0 0;
+            color: #999;
+            font-size: 0.9em;
+        }
+        /* Stats Grid */
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+            justify-items: center;
+            margin-top: 25px;
+        }
+        
+        .stat-square {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #111;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: 0.3s ease;
+        }
+        
+        .stat-square:hover {
+            transform: scale(1.1);
+            border-color: #fff;
+        }
+        
+        .stat-icon {
+            width: 35px;
+            height: 35px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+        /* Red/Yellow Card */
+        
+        .stat-square.red-card svg {
+            fill: #ff0000;
+        }
+        
+        .stat-square.yellow-card svg {
+            fill: #ffd700;
+        }
         
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 35px;
+            .container {
+                padding: 20px;
+                margin: 15px;
             }
-            .hero p {
-                font-size: 16px;
+            .stat-square {
+                width: 100px;
+                height: 100px;
             }
-            nav {
-                flex-direction: column;
+            .stat-icon {
+                width: 40px;
+                height: 40px;
             }
         }
+/* icons كاملين بيض */
+.stat-icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 8px;
+    filter: invert(1);
+}
+
+/* استثناء: red & yellow cards */
+.stat-square.red-card .stat-icon,
+.stat-square.yellow-card .stat-icon {
+    filter: none; /* ما يتبدلش اللون */
+}
+/* الحالة الأصلية */
+.experience {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.6s ease;
+}
+
+/* ملي كتبان */
+.experience.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* delay لكل واحدة */
+.experience:nth-child(1) { transition-delay: 0.1s; }
+.experience:nth-child(2) { transition-delay: 0.2s; }
+.experience:nth-child(3) { transition-delay: 0.3s; }
+.experience:nth-child(4) { transition-delay: 0.4s; }
+.experience:nth-child(5) { transition-delay: 0.5s; }
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contact-card {
+    background: #111;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    transition: 0.3s ease;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.contact-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-card:hover {
+    transform: scale(1.1);
+    border-color: #fff;
+}
+
+.contact-icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 10px;
+    filter: invert(1);
+}
+.contact-card {
+    text-decoration: none;
+    color: #fff;
+}
+.contact-card:hover {
+    transform: scale(1.1);
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
     </style>
 </head>
 
 <body>
+    <canvas id="stars"></canvas>
 
-    <!-- NAVBAR -->
-    <nav>
-        <div class="logo">YOUSSEF IDIR</div>
-        <div>
-            <a href="index.html">HOME</a>
-            <a href="about.html">ABOUT</a>
-            <a href="contact.html">CONTACT</a>
+    <div class="container" id="cvContainer">
+        <img src="IDIR.jpeg" alt="Lamine Yamal" class="profile-img">
+        <h1>YOUSSEF IDIR</h1>
+        <p style="text-align: center; color: #777; letter-spacing: 3px;">RIGHT WINGER | #10</p>
+
+        <!-- Player Attributes -->
+        <div class="section">
+            <h2>📊 PLAYER ATTRIBUTES</h2>
+            <div class="skills-cards">
+                <div class="skill-card">
+                    <img src="https://img.icons8.com/ios/50/running.png" class="attr-icon">
+                    <span class="skill-value">94</span>
+                    <span class="skill-name">PAC</span>
+                </div>
+                <div class="skill-card">
+                    <img src="https://img.icons8.com/ios/50/football2.png" class="attr-icon">
+                    <span class="skill-value">85</span>
+                    <span class="skill-name">SHO</span>
+                </div>
+                <div class="skill-card">
+                    <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;">
+                        <path d="m12 19 7-7-7-7" />
+                        <path d="M19 12H5" />
+                    </svg>
+                    <span class="skill-value">88</span>
+                    <span class="skill-name">PAS</span>
+                </div>
+                <div class="skill-card">
+                    <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:8px;">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M6.7 6.7l10.6 10.6" />
+                        <path d="M6.7 17.3l10.6-10.6" />
+                    </svg>
+                    <span class="skill-value">92</span>
+                    <span class="skill-name">DRI</span>
+                </div>
+                <div class="skill-card">
+                    <img src="https://img.icons8.com/ios/50/shield.png" class="attr-icon">
+                    <span class="skill-value">35</span>
+                    <span class="skill-name">DEF</span>
+                </div>
+                <div class="skill-card">
+                    <img src="https://img.icons8.com/ios/50/muscle.png" class="attr-icon">
+                    <span class="skill-value">68</span>
+                    <span class="skill-name">PHY</span>
+                </div>
+            </div>
         </div>
-    </nav>
 
-    <!-- HERO SECTION -->
-    <div class="hero">
-        <h1>WELCOME TO PORTFOLIO THE YOUSSEFN IDIR </h1>
-        <p>DISCOVER MY PROJECTS AND WORKS</p>
-        <img src="idir.jpeg" alt="LOGO" class="hero-img">
-        <br>
-        <a class="button" href="contact.html">CONTACT ME</a>
+        <!-- Career History -->
+        <div class="section">
+            <h2>⚽ CAREER HISTORY</h2>
+
+            <div class="experience">
+                <img src="https://img.icons8.com/ios-filled/100/trophy.png" class="exp-logo">
+                <div class="exp-content">
+                    <h3>FC Barcelona</h3>
+                    <p>2023 - Present | La Liga Breakthrough</p>
+                </div>
+            </div>
+
+            <div class="experience">
+                <img src="https://img.icons8.com/ios-filled/100/trophy.png" class="exp-logo">
+                <div class="exp-content">
+                    <h3>Morocco National Team</h3>
+                    <p>CAN 2024 Champion u20 & Best Player</p>
+                </div>
+            </div>
+
+            <!-- New Achievements -->
+            <div class="experience">
+                <img src="https://img.icons8.com/ios-filled/100/trophy.png" class="exp-logo">
+                <div class="exp-content">
+                    <h3>Champions League</h3>
+                    <p>Winner ×4 | 2019 - 2020 -2023 - 2026 </p>
+                </div>
+            </div>
+
+            <div class="experience">
+                <img src="https://img.icons8.com/ios-filled/100/trophy.png" class="exp-logo">
+                <div class="exp-content">
+                    <h3>CAF Champions League</h3>
+                    <p>Winner ×2 | 2023 - 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Season Stats -->
+        <div class="section">
+            <h2>📈 SEASON STATS (2025/26)</h2>
+            <div class="stats-grid">
+                <div class="stat-square">
+                    <img src="https://img.icons8.com/ios-filled/50/stadium.png" class="stat-icon">
+                    <span class="stat-value">39</span>
+                    <span class="stat-label">Matches</span>
+                </div>
+                <div class="stat-square">
+                    <img src="https://img.icons8.com/ios-filled/50/football2.png" class="stat-icon">
+                    <span class="stat-value">38</span>
+                    <span class="stat-label">Goals</span>
+                </div>
+                <div class="stat-square">
+                    <img src="https://img.icons8.com/ios-filled/50/handshake.png" class="stat-icon">
+                    <span class="stat-value">25</span>
+                    <span class="stat-label">Assists</span>
+                </div>
+                <div class="stat-square homme-match">
+                    <img src="https://img.icons8.com/ios-filled/50/trophy.png" class="stat-icon">
+                    <span class="stat-value">9</span>
+                    <span class="stat-label">Homme de Match</span>
+                </div>
+                <div class="stat-square yellow-card">
+                    <svg class="stat-icon" width="40" height="40" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="8" width="48" height="48" rx="4" ry="4" fill="#ffd700" />
+                    </svg>
+                    <span class="stat-value">7</span>
+                    <span class="stat-label">Yellow Card</span>
+                </div>
+                <!-- Red Card -->
+                <div class="stat-square red-card">
+                    <svg class="stat-icon" width="40" height="40" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="8" y="8" width="48" height="48" rx="4" ry="4" fill="#ff0000" />
+                    </svg>
+                    <span class="stat-value">1</span>
+                    <span class="stat-label">Red Card</span>
+                </div>
+
+                <!-- Yellow Card -->
+
+            </div>
+        </div>
+      <div class="section">
+    <h2>📞 CONTACT</h2>
+
+    <div class="contact-grid">
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/youssofe__00/?__pwa=1" target="_blank" class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/50/instagram-new.png" class="contact-icon">
+            <p>@youssofe__00</p>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/2126983285998" target="_blank" class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/50/whatsapp.png" class="contact-icon">
+            <p>WhatsApp</p>
+        </a>
+
+        <!-- Phone -->
+        <a href="tel:06983285998" class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/50/phone.png" class="contact-icon">
+            <p>Call Me</p>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:idiryoussefxc7@gmail.com" class="contact-card">
+            <img src="https://img.icons8.com/ios-filled/50/new-post.png" class="contact-icon">
+            <p>Email</p>
+        </a>
+
+    </div>
+</div>
+
+<!-- Football Journey -->
+<div class="section">
+    <h2>🚀 FOOTBALL JOURNEY</h2>
+
+    <div class="experience">
+        <img src="https://th.bing.com/th?q=SCCM+Logo+Football&w=120&h=120&c=1&rs=1&qlt=70&o=7&cb=1&dpr=1.5&pid=InlineBlock&rm=3&mkt=en-XA&cc=MA&setlang=fr&adlt=strict&t=1&mw=247" class="exp-logo">
+        <div class="exp-content">
+            <h3>SCCM</h3>
+            <p>2017 | بداية المسيرة الكروية</p>
+        </div>
     </div>
 
-    <!-- PROJECTS SECTION -->
-    <div class="projects">
-        <div class="project">
-            <img src="https://tse1.mm.bing.net/th/id/OIP.CExX2umnV8PMmdPfzxwepwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Project 1">
-            <h3>YOUSSEF IDIR</h3>
-            <p>YOUSSEF IDIR IS THE BEST PLAYER IN PES FOR THE YEARS 2024/2025 </p>
-        </div>
-        <div class="project">
-            <img src="idir.jpeg" alt="pr">
-            <h3>YOUSSEF IDIRE </h3>
-            <p>MOGHTASIB 7AGAR ANANI JABAR RAY7 MAT7WICH SKOMA</p>
-        </div>
-        <div class="project">
-            <img src="skoma.jpeg" alt="Project 3">
-            <h3>L9A7BA TA3T YOUSSEF IDIR</h3>
-            <p>LI MAKAY3RAFCH SKOMA SKOMA HOWA L9A7BA TA3T YOUSSEF F PES O DIMA HAZO </p>
-        </div>
-        <div class="project">
-            <img src="https://thumbs.dreamstime.com/b/lionel-messi-22716478.jpg" alt="Project 4">
-            <h3>ZALAL D YOUSSEF </h3>
-            <p>YOUSSEF HOWA 3ABSI 3ACHE9 MESSI KAYMOT 3LA ZAB D MESSI </p>
+    <div class="experience">
+        <img src="data:image/webp;base64,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" class="exp-logo">
+        <div class="exp-content">
+            <h3>Raja Club Athletic</h3>
+            <p>2019 | انتقال بـ 5M</p>
         </div>
     </div>
 
+    <div class="experience">
+        <img src="https://th.bing.com/th/id/OIP.Gz86EH8dyzDG_sbSpJ4lggHaHg?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" class="exp-logo">
+        <div class="exp-content">
+            <h3>FC Barcelona</h3>
+            <p>2024 | انتقال بـ 10M</p>
+        </div>
+    </div>
+
+</div>
+
+        <div style="margin-top: 40px; text-align: center; opacity: 0.6;">
+            <p>by imad lharmach   </p>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        // Contact Animation
+const contacts = document.querySelectorAll('.contact-card');
+
+function showContacts() {
+    const trigger = window.innerHeight * 0.85;
+
+    contacts.forEach(card => {
+        const top = card.getBoundingClientRect().top;
+
+        if (top < trigger) {
+            card.classList.add('show');
+        }
+    });
+}
+
+window.addEventListener('scroll', showContacts);
+window.addEventListener('load', showContacts);
+
+        // Animation Career History
+const experiences = document.querySelectorAll('.experience');
+
+function showExperience() {
+    const trigger = window.innerHeight * 0.85;
+
+    experiences.forEach(exp => {
+        const top = exp.getBoundingClientRect().top;
+
+        if (top < trigger) {
+            exp.classList.add('show');
+        }
+    });
+}
+
+window.addEventListener('scroll', showExperience);
+window.addEventListener('load', showExperience);
+        // Fade-in
+        window.addEventListener('load', () => {
+            document.getElementById('cvContainer').classList.add('visible');
+        });
+
+        // Stars Animation
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 150; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 1.5,
+                dx: (Math.random() - 0.5) * 0.2,
+                dy: (Math.random() - 0.5) * 0.2
+            });
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            for (let s of stars) {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+                s.x += s.dx;
+                s.y += s.dy;
+                if (s.x < 0) s.x = canvas.width;
+                if (s.x > canvas.width) s.x = 0;
+                if (s.y < 0) s.y = canvas.height;
+                if (s.y > canvas.height) s.y = 0;
+            }
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+       
+    </script>
 </body>
 
 </html>
